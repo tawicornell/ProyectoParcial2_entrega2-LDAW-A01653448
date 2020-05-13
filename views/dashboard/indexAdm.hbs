@@ -21,7 +21,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat fringilla
 
 <button onclick="window.location.href = 'app/../crearSala'">Nueva sala</button>
 
-<button onclick="window.location.href = 'app/../loadSala'">Jugar</button>
+{{! Enviar datos a otro controller diferente con un post ligado al router vvv }}
+<form method="post" action="app/../chat">
+  <input style="display: none;" value={{user}} name="user">
+    <input style="display: none;" value={{group}} name="group">
+  <input type="submit" value="Jugar"/>
+</form>
+
 </ul>
 <br>
 

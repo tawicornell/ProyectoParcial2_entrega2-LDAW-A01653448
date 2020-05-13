@@ -11,7 +11,7 @@ let sessionStore = new session.MemoryStore;
 let passport = require('passport');
 const bodyparser = require('body-parser');
 
-
+//TUTORIAL DE SOCKET IO
 
 //socket.io
 var server = require('http').createServer(app);
@@ -89,8 +89,8 @@ app.listen(appConfig.expressPort, () => {
 
 var messages = [{
   id: 1,
-  text: "Hola soy un mensaje",
-  author: "Carlos Azaustre"
+  text: "Hola, bienvenido al chat se amable :)",
+  author: "Sistema"
 }];
 
 app.use(express.static('public'));
@@ -101,18 +101,8 @@ app.get('/hello', function(req, res) {
   res.status(200).send("Hello World!");
 });
 */
-/*
-io.on('connection', function(socket) {
-  console.log('Alguien se ha conectado con Sockets');
-  socket.emit('messages', messages);
-  
-  socket.on('new-message', function(data) {
-    messages.push(data);
-    io.sockets.emit('messages', messages);
-    console.log("Boop");
-  });
-});
-*/
+
+
 //FUNCIONES DEL SEVRER AL VER UN ON
 
 io.on('connection', function(socket) {

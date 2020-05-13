@@ -16,22 +16,7 @@ if ( user.role == 'admin' ) {
   }
 }
 
-exports.entrarSala = (req, res) => {
 
-  let user = req.user;
-  let number = req.user.groupID;
-  //console.log("2");
-      GroupModel.findbyGroupID(number).then((a) =>  {
-  
-        var obj = JSON.parse(a.members); 
-  //console.log("3");
-          res.render('dashboard/salaJuego', {  user:user, groups:a, members:obj.members   });
-        
-        });
- 
-
-
-}
 
 exports.groupsAll = (req, res) =>{
 

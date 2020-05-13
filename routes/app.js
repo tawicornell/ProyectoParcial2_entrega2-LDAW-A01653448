@@ -13,8 +13,7 @@ router.get('/groups', dashboardController.groupsAll);
 router.get('/salaCrea/:id', dashboardController.loadNuevoHost);
 router.get('/crearSala', dashboardController. nuevaSala);
 
-//unirse a sala de juego
-router.get('/loadSala', dashboardController. entrarSala);
+
 
 //registrar sala
 router.post('/unirseSala', dashboardController. registrarSala);
@@ -27,6 +26,7 @@ router.post('/salaCrea/backToHomeAbort',dashboardController.cancelarSala);
 //otros
 router.get('/dashboard', dashboardController.index);
 
-router.get('/chat',chat.index)
+//unirse a sala de juego
+router.post('/chat',chat.index)
 
 module.exports = router;

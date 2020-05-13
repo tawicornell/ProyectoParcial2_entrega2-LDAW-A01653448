@@ -1,5 +1,63 @@
+<style>
 
-  <h1>My Aplicación con Sockets</h1>
+.salaSecciones{
+    display: table-cell;
+}
+
+</style>
+
+  <div class="salaSecciones">
+  <ul>ID del juego: {{groups.groupID}} </ul>
+ <ul> Host : {{groups.host}} </ul>
+ <ul>Eres {{ user.name }}, acciones:</ul>
+
+<ul> 
+
+<form method="post" action="app/../salaCrea/backToHome">
+  <input type="submit"  value="Salir"/>
+</form>
+
+<form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Abandonar juego (e.g.)"/>
+</form>
+
+<form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Pasar Turno"/>
+</form>
+
+</ul>
+   <ul> Integrantes : {{ groups.memberNum }} </ul>
+<ul>    
+    Miembros:
+     {{#each members as |algo|}}
+    <li>
+      
+     Nombre {{algo}} <br> 
+     Status de turno {{algo}} <br> 
+     Status: En juego <br> <br> 
+     Puntos de victoria: 0 pts <br> 
+     Rutas/carretera conectadas: 2 <br> 
+     Pueblos: 2 <br> 
+     Ciudades: 0 <br> 
+     Madera: 1 <br> 
+     Piedra: 0 <br> 
+     Arcilla: 2 <br> 
+     Trigo: 1 <br> 
+
+      <form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Kick (e.g.)"/>
+</form>
+
+    </li>
+   
+    {{/each}}
+    
+    </ul>
+
+</div>
+
+<div  class="salaSecciones">
+  <h3>Chat de la sala</h3>
   <script src="/socket.io/socket.io.js"></script>
 
 
@@ -19,12 +77,12 @@
 var socket = io.connect('http://localhost:8080', { 'forceNew': true });
 
 socket.on('messages', function(data) {
-  console.log(data+" desde hbs");
+  console.log(JSON.stringify(data) +" desde hbs");
   render(data);
 })
 
 function render (data) {
-    console.log("reder de hbs");
+    console.log("render de hbs");
   var html = data.map(function(elem, index) {
     return(`<div>
               <strong>${elem.author}</strong>:
@@ -47,13 +105,14 @@ function addMessage(e) {
  </script>
 
 <body>
-  <h1>My App</h1>
   <div id="messages"></div>
   <br/>
   <form onsubmit="return addMessage(this)">
-    <input type="text" id="username" placeholder="Tu Nombre" >
-    <input type="text" id="texto" placeholder="Cuéntanos algo...">
+    <input readonly type="text" id="username" value={{user.name}} >
+    <input type="text" id="texto" placeholder="Escribe algo...">
     <input type="submit" value="Enviar!">
   </form>
 </body>
-</html>
+
+
+</div>
