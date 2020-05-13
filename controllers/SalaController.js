@@ -19,14 +19,7 @@ exports.index = (req, res) => {
     console.log("desde el export del router");
 
     res.render('sala/chat');
-    /*
-      socket.on('connection', (socket) => {
-        socket.emit('news', { hello: 'world' });
-        socket.on('my other event', (data) => {
-          console.log(data);
-        });
-      });
-      */
+  
 
 }
 

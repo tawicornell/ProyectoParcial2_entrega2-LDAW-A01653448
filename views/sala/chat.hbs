@@ -1,12 +1,59 @@
-<script src="/socket.io/socket.io.js"></script>
+
+  <h1>My Aplicación con Sockets</h1>
+  <script src="/socket.io/socket.io.js"></script>
+
+
+{{!
 <script>
   const socket = io.connect('http://localhost:8080');
   socket.on('news', (data) => {
-
    let datos = JSON.stringify(data);
     console.log(datos+" desde el hbs");
-
     socket.emit('my other event', { my: 'data' });
   });
 </script>
-<h1>Hola :)</h1>
+ }}
+
+
+ <script>
+var socket = io.connect('http://localhost:8080', { 'forceNew': true });
+
+socket.on('messages', function(data) {
+  console.log(data+" desde hbs");
+  render(data);
+})
+
+function render (data) {
+    console.log("reder de hbs");
+  var html = data.map(function(elem, index) {
+    return(`<div>
+              <strong>${elem.author}</strong>:
+              <em>${elem.text}</em>
+            </div>`);
+  }).join(" ");
+  document.getElementById('messages').innerHTML = html;
+}
+
+function addMessage(e) {
+  var message = {
+    author: document.getElementById('username').value,
+    text: document.getElementById('texto').value
+  };
+  console.log(JSON.stringify(message)+" func add");
+  socket.emit('new-message', message);
+  return false;
+}
+
+ </script>
+
+<body>
+  <h1>My App</h1>
+  <div id="messages"></div>
+  <br/>
+  <form onsubmit="return addMessage(this)">
+    <input type="text" id="username" placeholder="Tu Nombre" >
+    <input type="text" id="texto" placeholder="Cuéntanos algo...">
+    <input type="submit" value="Enviar!">
+  </form>
+</body>
+</html>

@@ -78,6 +78,7 @@ app.use('/app', authMiddleware.isAuth, appRoutes);
 /**
  * App Init
  */
+
 /*
 app.listen(appConfig.expressPort, () => {
   console.log(`Server is listenning on ${appConfig.expressPort}! (http://localhost:${appConfig.expressPort})`);
@@ -87,40 +88,51 @@ app.listen(appConfig.expressPort, () => {
 
 
 var messages = [{
-
   id: 1,
-
   text: "Hola soy un mensaje",
-
   author: "Carlos Azaustre"
-
 }];
+
 app.use(express.static('public'));
 
+//PRUEBA DE CONEXION GET SOLO
+/*
 app.get('/hello', function(req, res) {
-
   res.status(200).send("Hello World!");
-
 });
+*/
+/*
+io.on('connection', function(socket) {
+  console.log('Alguien se ha conectado con Sockets');
+  socket.emit('messages', messages);
+  
+  socket.on('new-message', function(data) {
+    messages.push(data);
+    io.sockets.emit('messages', messages);
+    console.log("Boop");
+  });
+});
+*/
+//FUNCIONES DEL SEVRER AL VER UN ON
 
 io.on('connection', function(socket) {
-  let n = Math.random();
-  console.log('Alguien se ha conectado con Sockets'+n.toString());
-
+  console.log('Alguien se ha conectado con Sockets');
   socket.emit('messages', messages);
-
+  
   socket.on('new-message', function(data) {
-
     messages.push(data);
-
     io.sockets.emit('messages', messages);
-
+    console.log("Boop");
   });
-
-
-
 });
 
+
+server.listen(8080, function() {
+  console.log("Servidor corriendo en http://localhost:8080");
+});
+
+//JUNK Y HOT SAVES
+/*
 io.on('connection', (socket) => {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', (data) => {
@@ -130,11 +142,4 @@ io.on('connection', (socket) => {
 
   });
 });
-
-
-
-server.listen(8080, function() {
-
-  console.log("Servidor corriendo en http://localhost:8080");
-
-});
+*/
