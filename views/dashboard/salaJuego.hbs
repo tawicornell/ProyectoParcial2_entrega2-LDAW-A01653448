@@ -1,0 +1,67 @@
+
+  <ul>ID del juego: {{groups.groupID}} </ul>
+ <ul> Host : {{groups.host}} </ul>
+ <ul>Eres {{ user.name }}, acciones:</ul>
+
+<ul> 
+
+<form method="post" action="app/../salaCrea/backToHome">
+  <input type="submit"  value="Salir"/>
+</form>
+
+<form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Abandonar juego (e.g.)"/>
+</form>
+
+<form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Pasar Turno"/>
+</form>
+
+</ul>
+   <ul> Integrantes : {{ groups.memberNum }} </ul>
+<ul>    
+    Miembros:
+     {{#each members as |algo|}}
+    <li>
+      
+     Nombre {{algo}} <br> 
+     Status de turno {{algo}} <br> 
+     Status: En juego <br> <br> 
+     Puntos de victoria: 0 pts <br> 
+     Rutas/carretera conectadas: 2 <br> 
+     Pueblos: 2 <br> 
+     Ciudades: 0 <br> 
+     Madera: 1 <br> 
+     Piedra: 0 <br> 
+     Arcilla: 2 <br> 
+     Trigo: 1 <br> 
+
+      <form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Kick (e.g.)"/>
+</form>
+
+    </li>
+   
+    {{/each}}
+    
+    </ul>
+
+
+    <div>
+        CHAT (e.g.)<br><br>
+
+      A:  Integer non eros elit. Curabitur ligula sem, hendrerit vitae leo ac, viverra iaculis tortor.<br>
+      B:   Ut pharetra, urna at bibendum sollicitudin, mi felis luctus massa, in convallis libero dui vel nulla.<br>
+       C:   Donec eu nunc vel risus dictum posuere vitae commodo nunc. Etiam sagittis consequat mattis. <br>
+       A:   Aliquam vitae nisi a neque consectetur scelerisque at a nunc. Sed aliquet magna sapien, <br>
+        A:  id scelerisque ex fringilla et. Vestibulum id elit nisl. Duis vestibulum, massa quis ornare ultricies, <br>
+        B:  tortor augue tincidunt eros, ut eleifend est felis eget ex. Sed efficitur nec orci et rutrum.<br>
+        C:  Sed nunc sapien, tristique ac tortor at, pellentesque maximus ex. <br>
+    
+    <input type="text" name="" id="">
+       <form method="post" action="app/../SIN_ASIGNAR">
+  <input type="submit"  value="Enviar (e.g.)"/>
+</form>
+
+    </div>
+    

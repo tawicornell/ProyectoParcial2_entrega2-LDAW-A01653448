@@ -1,0 +1,39 @@
+<main role="main" class="container">
+  <div class="starter-template">
+    <h1>Hola {{ user.name }}</h1>
+    <p>
+        <a>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat fringilla egestas<br>
+. Mauris ac mauris ante. Aliquam eget pretium ante. Orci varius natoque penatibus et magnis<br>
+ dis parturient montes, nascetur ridiculus mus. Nunc finibus pellentesque ligula nec tristique.<br>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at nibh rhoncus, sollicitudin<br>
+   mauris nec, semper urna. <br>
+   <br>
+      </a>
+
+      <a href="/logout">Cierra sesión</a>
+    </p>
+
+<ul>
+<button onclick="window.location.href = 'app/../users'">usersDB (Debug)</button>
+
+<button onclick="window.location.href = 'app/../groups'">groupsDB (Debug)</button>
+
+<button onclick="window.location.href = 'app/../crearSala'">Nueva sala</button>
+
+<button onclick="window.location.href = 'app/../loadSala'">Jugar</button>
+</ul>
+<br>
+
+<form method="post" action="app/../unirseSala">
+  Ingresa un codigo de sala de juego (6 digitos)<br>
+  <input type="numer"    maxlength="6" minlength="6"  name="registrarSalaID" value="######" required/>
+
+  <input type="submit"  value="Registrar"/>
+
+</form>
+
+
+
+  </div>
+</main>

@@ -1,0 +1,22 @@
+<h2>Registros</h2>
+
+<ul>
+    {{#each users}}
+    <li>
+        Usuario registrado <br>
+      Nombre:  {{name}} <br> 
+      Email:   {{email}}  <br>
+       GroupID:   {{groupID}}<br>
+    
+    <!-- Enviar parametro a una ruta  en app.js-->
+    <form action="/app/{{id}}/delete" method="post">
+        <input type ="submit" value="DELETE">
+    	</form>
+
+    </li>
+   
+    {{/each}}
+
+</ul>
+
+

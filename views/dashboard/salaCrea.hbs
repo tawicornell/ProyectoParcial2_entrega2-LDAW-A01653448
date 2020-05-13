@@ -1,0 +1,30 @@
+ <ul>La sala se ha creado exitosamente  {{ user.name }}, el token es {{user.groupID}}, compartelo</ul>
+  <ul>gameID de sala: {{groups.groupID}} </ul>
+    <ul> Number of memebers : {{ groups.memberNum }} </ul>
+      <ul> Host data : {{groups.host}}, {{user.email}} </ul>
+
+<ul> 
+
+<form method="post" action="app/../backToHome">
+  <input type="submit"  value="Aceptar"/>
+</form>
+
+<form method="post" action="app/../backToHomeAbort">
+  <input type="submit"  value="Cancelar"/>
+</form>
+
+</ul>
+<!--
+<ul>    
+    Miembros:
+     {{#each members as |row|}}
+    <li>
+      
+      {{row}} <br> 
+
+    </li>
+   
+    {{/each}}
+    
+    </ul>
+    -->
