@@ -11,6 +11,7 @@ let sessionStore = new session.MemoryStore;
 let passport = require('passport');
 const bodyparser = require('body-parser');
 
+
 //TUTORIAL DE SOCKET IO
 
 //socket.io
@@ -90,7 +91,7 @@ app.listen(appConfig.expressPort, () => {
 var messages = [{
   id: 1,
   text: "Hola, bienvenido al chat se amable :)",
-  author: "Sistema"
+  author: "Sistema normal"
 }];
 
 app.use(express.static('public'));
@@ -117,6 +118,23 @@ io.on('connection', function(socket) {
 });
 
 
+var messagesPir = [{
+  id: 1,
+  text: "Yarr, welcome to the pirate chat P)",
+  author: "System External API (ENG)"
+}];
+
+io.on('connection', function(socket) {
+ // console.log('Alguien se ha conectado con Sockets');
+  socket.emit('messagesPir', messagesPir);
+  
+  socket.on('new-messagePir', function(data) {
+    messagesPir.push(data);
+    io.sockets.emit('messagesPir', messagesPir);
+    console.log("Yarr");
+  });
+});
+
 server.listen(8080, function() {
   console.log("Servidor corriendo en http://localhost:8080");
 });
@@ -133,3 +151,4 @@ io.on('connection', (socket) => {
   });
 });
 */
+

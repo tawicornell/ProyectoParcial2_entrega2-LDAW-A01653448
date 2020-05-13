@@ -1,7 +1,7 @@
 <style>
 
 .salaSecciones{
-    display: table-cell;
+   display: table-cell;
 }
 
 </style>
@@ -56,9 +56,6 @@
 
 </div>
 
-<div  class="salaSecciones">
-  <h3>Chat de la sala</h3>
-  <script src="/socket.io/socket.io.js"></script>
 
 
 {{!
@@ -73,6 +70,13 @@
  }}
 
 
+{{!  -***********************************************}}
+
+<div  class="salaSecciones">
+  <h3>Chat de la sala</h3>
+  <script src="/socket.io/socket.io.js"></script>
+
+
  <script>
 var socket = io.connect('http://localhost:8080', { 'forceNew': true });
 
@@ -84,12 +88,12 @@ socket.on('messages', function(data) {
 function render (data) {
     console.log("render de hbs");
   var html = data.map(function(elem, index) {
-    return(`<div>
-              <strong>${elem.author}</strong>:
-              <em>${elem.text}</em>
+    return(`<div clas="normal">
+              <strong clas="normal">${elem.author}</strong>:
+              <em clas="normal">${elem.text}</em>
             </div>`);
   }).join(" ");
-  document.getElementById('messages').innerHTML = html;
+  document.getElementById('chatNormal').innerHTML = html;
 }
 
 function addMessage(e) {
@@ -105,10 +109,10 @@ function addMessage(e) {
  </script>
 
 <body>
-  <div id="messages"></div>
+  <div id="chatNormal"></div>
   <br/>
   <form onsubmit="return addMessage(this)">
-    <input readonly type="text" id="username" value={{user.name}} >
+    <input readonly type="text" id="username" value={{user.name}}>
     <input type="text" id="texto" placeholder="Escribe algo...">
     <input type="submit" value="Enviar!">
   </form>
@@ -116,3 +120,81 @@ function addMessage(e) {
 
 
 </div>
+
+
+{{!  -***********************************************}}
+
+<div  class="salaSecciones">
+  <h3>Chat Pirata</h3>
+  <script src="/socket.io/socket.io.js"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+ <script   >
+   
+var socket = io.connect('http://localhost:8080', { 'forceNew': true });
+//detecta pushes del server y despliega
+socket.on('messagesPir', function(data) {
+  console.log(JSON.stringify(data) +" desde hbs");
+  render(data);
+})
+
+function render (data) {
+    console.log("render de hbs");
+  var html = data.map(function(elem, index) {
+    return(`<div clas="pirata">
+              <strong clas="pirata">${elem.author}</strong>:
+              <em clas="pirata">${elem.text}</em>
+            </div>`);
+  }).join(" ");
+  document.getElementById('messagesPir').innerHTML = html;
+}
+
+function translate(auth, str){
+  console.log("Boop");
+   console.log(str);
+
+    $.ajax({
+        method:"POST",
+        url:"app/../translate-yarg",
+        data:{texto: str}
+    })
+    .done(function(data){
+        console.log(data+ " en pirata");
+
+  var final = {
+    author : auth,
+    text : data
+  }
+
+         socket.emit('new-messagePir', final);
+        return data;
+    });
+}
+
+function addMessagePir(e) {
+  var messagePir = {
+    author: document.getElementById('usernamePir').value,
+    text: document.getElementById('textoPir').value
+  };
+    var temp = translate(messagePir.author,messagePir.text);
+    messagePir.text = temp;
+
+ // socket.emit('new-messagePir', messagePir);
+  return false;
+}
+
+ </script>
+
+<body>
+  <div id="messagesPir"></div>
+  <br/>
+  <form onsubmit="return addMessagePir(this)">
+    <input readonly type="text" id="usernamePir" value={{user.name}} >
+    <input type="text" id="textoPir" placeholder="English only...">
+   <button type="submit">Pirate!</button>
+  </form>
+</body>
+
+
+</div>
+
